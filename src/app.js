@@ -33,10 +33,19 @@ function formatDate(timestamp){
     return `${day} ${hours}:${minutes}`;
 
 }
-
-
+function search(city){
 let apiKey="8c48afa47a9a9c24f3500c7039d50aaa"
-let city= "New York"
 let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8c48afa47a9a9c24f3500c7039d50aaa&units=metric`
 
 axios.get(apiUrl).then(displayTemperature);
+}
+function handleSubmit(event){
+    event.preventDefault();
+    cityInputElement=document.querySelector("#city-input");
+    search(cityInputElement.value)
+    
+}
+search("New York")
+
+let form=document.querySelector("#search-form");
+form.addEventListener("submit",handleSubmit)
