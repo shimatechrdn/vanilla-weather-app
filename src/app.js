@@ -16,8 +16,7 @@ function displayTemperature(response) {
     iconElement.setAttribute("alt",response.data.weather[0].description)
     celsiusTemperature= response.data.main.temp;
 
-    getForecast(response.data.coord)
-    
+    getForecast(response.data.coord);    
 
 }
 function formatDate(timestamp){
@@ -38,7 +37,8 @@ function formatDate(timestamp){
 
 }
 
-function displayForecast(){
+function displayForecast(response){
+    console.log(response.data.daily);
     let forecastElement= document.querySelector("#forecast")
 
     
@@ -68,16 +68,17 @@ function displayForecast(){
 
 function getForecast(coordinates){
     
-let apiKey="8c48afa47a9a9c24f3500c7039d50aaa"
-let apiUrl=`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid="8c48afa47a9a9c24f3500c7039d50aaa"&units=metric`
+let apiKey="0a521eaf234a3a56f45252fac3c737ad"
+let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
 
+axios.get(apiUrl).then(displayForecast);
 }
 
 
 
 function search(city){
-let apiKey="8c48afa47a9a9c24f3500c7039d50aaa"
-let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8c48afa47a9a9c24f3500c7039d50aaa&units=metric`
+let apiKey="0a521eaf234a3a56f45252fac3c737ad"
+let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 
 axios.get(apiUrl).then(displayTemperature);
 }
@@ -121,5 +122,5 @@ celsiusLink.addEventListener("click",displayCelsiusTemperature);
 
 search("New York");
 
-displayForecast();
+
 
